@@ -28,6 +28,21 @@ const getAllUsers = async (req, res) => {
   res.json(user);
 }
 
+// delete a user
+const deleteUser = async (req, res) => {
+  const result = await User.findByIdAndDelete({_id: req.params.id}).catch( e =>{
+    console.log(e)
+  });
 
+  res.json(result);
+}
 
-module.exports = {addUser, getUser, getAllUsers};
+// update a user
+const updateUser = async(req, res) => {
+  const updatedUser = await User.updateOne({_id: req.params.id}, {$set: req.body}).catch( e =>{
+    console.log(e)
+  });
+  res.json(updatedUser);
+}
+
+module.exports = {addUser, getUser, getAllUsers, deleteUser, updateUser};
