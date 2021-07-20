@@ -15,9 +15,19 @@ const getUser = async (req, res) => {
   const user = await User.findById({_id: req.params.id}).catch( e =>{
     console.log(e)
   });
+
+  res.json(user);
+}
+
+// get all users
+const getAllUsers = async (req, res) => {
+  const user = await User.find().catch( e =>{
+    console.log(e)
+  });
+  
   res.json(user);
 }
 
 
 
-module.exports = {addUser, getUser};
+module.exports = {addUser, getUser, getAllUsers};
