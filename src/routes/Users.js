@@ -1,24 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user')
+const { addUser } = require('../controllers/user-controller')
 
 //get all routes
 router.get('/', (req, res) => {
   res.send('showing all users');
 })
 
-router.post('/add-user', (req, res) => {
-  const newUser = new User(req.body);
-  newUser.save()
-    .then( result => {
-      res.json(result);
-    })
-    .catch(e =>{
-      console.log(e);
-    })
-  // const savedUser = await newUser.save();
-  // res.json(savedUser);
-})
+router.post('/add-user', addUser);
+
+// router.post('/add-user', (req, res) => {
+//   const newUser = new User(req.body);
+//   newUser.save()
+//     .then( result => {
+//       res.json(result);
+//     })
+//     .catch(e =>{
+//       console.log(e);
+//     })
+// })
 
 router.get('/all-users', (req, res) => {
   User.find()
