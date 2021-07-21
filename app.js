@@ -7,7 +7,6 @@ const swaggerJsDoc = require('swagger-jsDoc');
 const swaggerUI = require('swagger-ui-express');
 
 
-
 // create the express app
 const app = express();
 app.use(cors());
@@ -21,7 +20,7 @@ mongoose.connect(process.env.DB_URL, {
 })
 .then( result => {
   console.log('connected to database');
-  app.listen(process.env.PORT, console.log('listening on port 3003'))
+  app.listen(PORT, console.log('listening on port 3003'))
 })
 .catch( err => {
   console.log(err);
