@@ -1,8 +1,5 @@
 const User = require('../models/user')
-
-function respond (status, message, data){
-  return {status, message, data,};
-};
+const { respond } = require('../functions/functions');
 
 // create a new user
 const addUser = async (req, res) => {
@@ -29,7 +26,7 @@ const getAllUsers = async (req, res) => {
     console.log(e)
   });
   
-  res.status(202).json(respond(true, 'Users retrieved', user));
+  res.status(202).json(respond(true, 'Users retrieved', result));
 }
 
 // delete a user
