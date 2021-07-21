@@ -10,7 +10,7 @@ require("dotenv").config();
 const { assert, should, expect } = chai;
 describe("Users GET Test Cases", () => {
   it("GET /users, gets array of users", async () => {
-    const res = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`).get("/users");
+    const res = await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`).get("/users");
     expect(res.status).to.equal(200);
 
     const users = res.body.data;
@@ -18,7 +18,7 @@ describe("Users GET Test Cases", () => {
   });
 
   it("GET /users, returns a users array where each item contains id, name, email and role", async () => {
-    const res = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`).get("/users");
+    const res = await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`).get("/users");
     expect(res.status).to.equal(200);
 
     const users = res.body.data;
@@ -31,7 +31,7 @@ describe("Users GET Test Cases", () => {
   });
 
   it("GET /users/:id,  returns a single user with a status of true", async () => {
-    const res = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`).get("/users");
+    const res = await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`).get("/users");
     expect(res.status).to.equal(200);
 
     const users = res.body.data;
@@ -43,7 +43,7 @@ describe("Users GET Test Cases", () => {
   it("GET /users/:id,  returns a single user with id, name and role", async () => {
 
     const userID = '60f750fbd0081d15c44c1dbb';
-    const res = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`).get(`/users/${userID}`);
+    const res = await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`).get(`/users/${userID}`);
     expect(res.status).to.equal(200);
 
     const user = res.body.data;

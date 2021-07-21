@@ -20,12 +20,12 @@ describe("Users PATCH test cases", () => {
     }
 
     // update the user
-    await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+    await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`)
       .patch(`/users/${userID}`).send(request)
       
      async ()=>{
         // get the user details again
-        const req = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+        const req = await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`)
         .get(`/users/${userID}`)
         
         const afterUpdate =  req.body.data;
@@ -35,7 +35,7 @@ describe("Users PATCH test cases", () => {
 
 
     // return user name back to default state
-    await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+    await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`)
     .patch(`/users/${userID}`).send(returnRequest);
 
   });

@@ -6,9 +6,26 @@ require("dotenv").config();
 const swaggerJsDoc = require('swagger-jsDoc');
 const swaggerUI = require('swagger-ui-express');
 
+
+
 // create the express app
 const app = express();
 app.use(cors());
+
+var PORT = process.env.PORT || process.env.NODE_PORT;
+
+// connect to the  database ( mongo db ATLAS)
+mongoose.connect(process.env.DB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then( result => {
+  console.log('connected to database');
+  app.listen(process.env.PORT, console.log('listening on port 3003'))
+})
+.catch( err => {
+  console.log(err);
+});
 
 // generate swagger information
 const swaggerOptions = {
@@ -26,20 +43,6 @@ const swaggerOptions = {
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
-
-
-// connect to the  database ( mongo db ATLAS)
-mongoose.connect(process.env.DB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then( result => {
-  console.log('connected to database');
-  app.listen(process.env.PORT, console.log('listening on port 3003'))
-})
-.catch( err => {
-  console.log(err);
-});
 
 
 // middleware

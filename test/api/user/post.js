@@ -16,7 +16,7 @@ describe("Users POST test cases", () => {
       email: 'random@gmail.com',
       role: 'Admin'
     }
-    const res = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+    const res = await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`)
       .post("/users")
       .send(request);
 
@@ -28,7 +28,7 @@ describe("Users POST test cases", () => {
 
     // delete the created user
     if(status === true){
-      await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+      await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`)
       .delete(`/users/${tempUserId}`)
     }
 
@@ -40,7 +40,7 @@ describe("Users POST test cases", () => {
       email: 'random@gmail.com',
       role: 'Admin'
     }
-    const res = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+    const res = await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`)
       .post("/users")
       .send(request);
 
@@ -55,7 +55,7 @@ describe("Users POST test cases", () => {
       email: 'randomgmail.com',
       role: 'Admin'
     }
-    const res = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+    const res = await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`)
       .post("/users")
       .send(request);
 
@@ -70,7 +70,7 @@ describe("Users POST test cases", () => {
       email: 'random@gmail.com',
       role: 'something'
     }
-    const res = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+    const res = await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`)
       .post("/users")
       .send(request);
 
@@ -84,7 +84,7 @@ describe("Users POST test cases", () => {
       email: 'random@gmail.com',
       role: 'something'
     }
-    const res = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+    const res = await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`)
       .post("/users")
       .send(request);
 
@@ -98,7 +98,7 @@ describe("Users POST test cases", () => {
       name: 'random user',
       role: 'Admin'
     }
-    const res = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+    const res = await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`)
       .post("/users")
       .send(request);
 
@@ -112,7 +112,7 @@ describe("Users POST test cases", () => {
       name: 'random user',
       email: 'random@gmail.com',
     }
-    const res = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+    const res = await chai.request(`${process.env.HOST_URL}:${process.env.NODE_PORT}`)
       .post("/users")
       .send(request);
 
