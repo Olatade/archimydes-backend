@@ -7,30 +7,36 @@ const chaiHttp = require("chai-http");
 chai.use(chaiHttp);
 require("dotenv").config();
 
-
+const userID = '60f750fbd0081d15c44c1dbb';
 const { assert, should, expect } = chai;
-describe("Users PUT test cases", () => {
-  it("POST /users, adds a new user to the database", async () => {
+describe("Users PATCH test cases", () => {
+  it("PATCH /users, edits user name successfully", async () => {
     const request = {
-      name: 'random user',
-      email: 'random@gmail.com',
-      role: 'Admin'
+      "name": "Tise Abiona Updated"
     }
-    const res = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
-      .post("/users")
-      .send(request);
 
-    expect(res.status).to.equal(201);
-
-    const status = res.body.status;
-    const tempUserId = res.body.data['_id'];
-    expect(status).to.equal(true);
-
-    // delete the created user
-    if(status === true){
-      await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
-      .delete(`/users/${tempUserId}`)
+    const returnRequest = {
+      "name": "Tise Abiona"
     }
+
+    // update the user
+    await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+      .patch(`/users/${userID}`).send(request)
+      
+     async ()=>{
+        // get the user details again
+        const req = await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+        .get(`/users/${userID}`)
+        
+        const afterUpdate =  req.body.data;
+        const newName = afterUpdate.name;
+        expect(newName).to.equal(request.name);
+      }
+
+
+    // return user name back to default state
+    await chai.request(`${process.env.HOST_URL}:${process.env.PORT}`)
+    .patch(`/users/${userID}`).send(returnRequest);
 
   });
 
