@@ -7,7 +7,7 @@ exports.userValidationResult = (req, res, next) => {
   const result = validationResult(req)
   if(!result.isEmpty()){
     const error = result.array()[0].msg;
-    return res.status(422).json(respond(false, error))
+    return res.status(400).json(respond(false, error))
   }
 
   next();

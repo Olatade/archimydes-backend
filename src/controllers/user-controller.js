@@ -30,7 +30,7 @@ const getUser = async (req, res) => {
 const getAllUsers = async (req, res) => {
   try{
     const users = await allUsers();
-    res.status(202).json(respond(true, 'Users retrieved', users));
+    res.status(200).json(respond(true, 'Users retrieved', users));
   }
   catch(e){
     res.status(500).json(respond(false, 'Error retrieving users'));
@@ -42,7 +42,7 @@ const getAllUsers = async (req, res) => {
 const deleteUser = async (req, res) => {
   try{
     const result = await deleteUserData(req.params.id);
-    res.status(202).json(respond(true, 'User deleted', result));
+    res.status(200).json(respond(true, 'User deleted', result));
   }
   catch(e){
     res.status(500).json(respond(false, 'Error deleting user'));
@@ -55,7 +55,7 @@ const updateUser = async(req, res) => {
   try{
     // const updatedUser = await User.updateOne({_id: req.params.id}, {$set: req.body});
     const updatedUser = await updateUserData(req);
-    res.status(202).json(respond(true, 'User updated', updatedUser));
+    res.status(200).json(respond(true, 'User updated', updatedUser));
   }
   catch(e){
     res.status(500).json(respond(false, 'User update failed'));

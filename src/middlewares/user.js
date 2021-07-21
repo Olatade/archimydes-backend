@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const {respond} = require('../functions/functions');
 
 exports.checkIfExist = async (req, res, next) => {
   const user = await User.findOne({email: req.body.email});
