@@ -27,11 +27,9 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
-//connect to mongoDB
-const dbURI = 'mongodb+srv://general:archimydes@archimydes.uagqk.mongodb.net/archimydes?retryWrites=true&w=majority';
 
-// connect to the database
-mongoose.connect(dbURI, {
+// connect to the  database ( mongo db ATLAS)
+mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
