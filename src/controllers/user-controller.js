@@ -1,5 +1,9 @@
 const User = require('../models/user')
 
+function respond (status, message, data){
+  return {status, message, data,};
+};
+
 // create a new user
 const addUser = async (req, res) => {
   const newUser = new User(req.body);
@@ -7,7 +11,7 @@ const addUser = async (req, res) => {
     console.log(e)
   });
 
-  res.json(savedUser);
+  res.status(200).json(respond(true, 'User created', savedUser));
 }
 
 // get a single user
@@ -16,7 +20,7 @@ const getUser = async (req, res) => {
     console.log(e)
   });
 
-  res.json(user);
+  res.status(200).json(respond(true, 'User retrieved', user));
 }
 
 // get all users
@@ -25,7 +29,7 @@ const getAllUsers = async (req, res) => {
     console.log(e)
   });
   
-  res.json(user);
+  res.status(202).json(respond(true, 'Users retrieved', user));
 }
 
 // delete a user
@@ -34,7 +38,7 @@ const deleteUser = async (req, res) => {
     console.log(e)
   });
 
-  res.json(result);
+  res.status(202).json(respond(true, 'User deleted', result));
 }
 
 // update a user
@@ -42,7 +46,8 @@ const updateUser = async(req, res) => {
   const updatedUser = await User.updateOne({_id: req.params.id}, {$set: req.body}).catch( e =>{
     console.log(e)
   });
-  res.json(updatedUser);
+
+  res.status(202).json(respond(true, 'User updated', updatedUser));
 }
 
 module.exports = {addUser, getUser, getAllUsers, deleteUser, updateUser};
