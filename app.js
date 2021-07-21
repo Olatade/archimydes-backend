@@ -1,11 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 var cors = require("cors");
-
+const UsersRoute = require('./src/routes/Users');
 
 // create the express app
 const app = express();
+app.use(cors());
 
 //connect to mongoDB
 const dbURI = 'mongodb+srv://general:archimydes@archimydes.uagqk.mongodb.net/archimydes?retryWrites=true&w=majority';
@@ -17,29 +17,20 @@ mongoose.connect(dbURI, {
 })
 .then( result => {
   console.log('connected to database');
+  app.listen(3003, console.log('listening on port 3003'))
 })
 .catch( err => {
   console.log(err);
 });
 
-// const db = mongoose.connection;
-// db.once('open', () => {
-//   console.log('connected to mongo db')
-// })
 
 // middleware
 app.use(express.json()); 
 app.use(express.urlencoded()); //Parse URL-encoded bodies
 
+app.use('/users', UsersRoute);
+
 // home route
 app.get('/', (req, res) =>{
   res.send("Hello world");
 })
-
-const UsersRoute = require('./src/routes/Users');
-app.use('/users', UsersRoute);
-
-
-//starting the server
-app.listen(3003, console.log('listening on port 3003'))
-

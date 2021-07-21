@@ -1,15 +1,7 @@
-const User = require('../models/user')
 
 const { check, validationResult } = require('express-validator');
+const { respond } = require('../functions/functions');
 
-function respond (status, message, data = []){
-  // exclude data from response if it's empty
-  if (data.length < 1){
-    return {status, message};
-  }else{
-    return {status, message, data};
-  }
-};
 
 exports.userValidationResult = (req, res, next) => {
   const result = validationResult(req)
@@ -46,9 +38,3 @@ exports.validateUpdateUser = [
   check('role').optional().trim().not().isEmpty().withMessage('Role is required')
   .isIn(['Admin', 'User']).withMessage('Role can be either Admin or User')
 ]
-
-exports.checkIfExist = async (req, res, next) => {
-  const user = await User.findOne({email: req.body.email});
-  if(user) return res.status(400).send(respond(false, 'A user with sent email exists'));
-  next()
-}
