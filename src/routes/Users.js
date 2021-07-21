@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { addUser, getUser, getAllUsers, deleteUser, updateUser } = require('../controllers/user-controller');
 const { userValidationResult, validateAddUser, validateUpdateUser} = require('../middlewares/user-validator');
-const { checkIfExist} = require ('../middlewares/user');
+const { checkIfExist, checkUpdatePossible} = require ('../middlewares/user');
 
 
 /**
@@ -58,6 +58,6 @@ router.delete('/:id', deleteUser);
  *    '200':
  *      description: A successful response
  */
-router.patch('/:id', validateUpdateUser, userValidationResult, updateUser);
+router.patch('/:id', validateUpdateUser, userValidationResult, checkUpdatePossible, updateUser);
 
 module.exports = router;

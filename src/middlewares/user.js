@@ -6,3 +6,9 @@ exports.checkIfExist = async (req, res, next) => {
   if(user) return res.status(400).send(respond(false, 'A user with sent email exists'));
   next()
 }
+
+exports.checkUpdatePossible = async (req, res, next) => {
+  const user = await User.findById({_id: req.params.id});
+  if(!user) return res.status(400).send(respond(false, 'User not found'));
+  next()
+}
